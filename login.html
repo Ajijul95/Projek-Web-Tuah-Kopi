@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="logo.jpg" />
+    <title>Login Staff - Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <img src="logo.jpg" alt="Logo Tuah Kopi" class="logo-img" />
+        <span class="logo-text">Tuah Kopi</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Beranda</a>
+        <a class="nav-link" href="user/menu.html">Menu</a>
+      </div>
+    </nav>
+
+    <main class="section" style="max-width: 520px; margin: 0 auto;">
+      <div class="card">
+        <div class="card-header">
+          <h2>Masuk Staff</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <select class="form-select" id="role">
+              <option value="admin">Admin</option>
+              <option value="barista">Barista</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input class="form-input" id="username" placeholder="admin / barista" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input class="form-input" id="password" type="password" placeholder="admin123 / barista123" />
+          </div>
+          <button class="submit-btn" onclick="doLogin()">Masuk</button>
+          <p style="margin-top: 14px; color: var(--muted); font-size: 13px;">
+            Demo default: admin/admin123 dan barista/barista123.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/login.js"></script>
+  </body>
+</html>

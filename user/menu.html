@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../logo.jpg" />
+    <title>Menu - Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="../index.html">
+        <img src="../logo.jpg" alt="Logo Tuah Kopi" class="logo-img" />
+        <span class="logo-text">Tuah Kopi</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../index.html">Beranda</a>
+        <a class="nav-link active" href="menu.html">Menu</a>
+        <a class="nav-link" href="order.html">Pesan</a>
+        <a class="nav-link" href="tracking.html">Aktivitas</a>
+      </div>
+      <a class="nav-btn" href="order.html">🛒 Pesan (<span id="cart-count">0</span>)</a>
+    </nav>
+
+    <main class="section">
+      <div class="section-label">Daftar Menu</div>
+      <h1 class="section-title">Pilihan Minuman Kami</h1>
+      <p class="section-sub">Menu ini diambil dari Firebase collection <strong>products</strong>.</p>
+
+      <div class="menu-filter">
+        <button class="filter-btn active" onclick="filterMenu('semua', this)">Semua</button>
+        <button class="filter-btn" onclick="filterMenu('panas', this)">Kopi Panas</button>
+        <button class="filter-btn" onclick="filterMenu('dingin', this)">Kopi Dingin</button>
+        <button class="filter-btn" onclick="filterMenu('signature', this)">Signature</button>
+        <button class="filter-btn" onclick="filterMenu('nonkopi', this)">Non-Kopi</button>
+      </div>
+
+      <div class="menu-grid" id="menu-grid"></div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/menu.js"></script>
+  </body>
+</html>

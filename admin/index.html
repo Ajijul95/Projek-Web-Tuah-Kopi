@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../logo.jpg" />
+    <title>Admin - Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <img src="../logo.jpg" alt="Logo Tuah Kopi" class="sidebar-logo-img" />
+          <div class="s-name">Tuah Kopi</div>
+          <div class="s-role">Admin Dashboard</div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <div class="sb-item active" onclick="showSection('overview', this)">📊 Ringkasan</div>
+          <div class="sb-item" onclick="showSection('products', this)">🛒 Kelola Menu</div>
+          <div class="sb-item" onclick="showSection('orders', this)">📋 Pesanan</div>
+          <div class="sb-item" onclick="showSection('baristas', this)">👥 Akun Barista</div>
+          <div class="sb-item" onclick="showSection('reports', this)">📄 Laporan</div>
+        </nav>
+
+        <div class="sb-logout">
+          <button class="logout-btn" onclick="logoutAdmin()">Keluar</button>
+        </div>
+      </aside>
+
+      <main class="dash-main">
+        <header class="dash-topbar">
+          <h2 id="page-title">Ringkasan</h2>
+          <div>👤 Admin</div>
+        </header>
+
+        <div class="dash-body">
+          <section class="dash-section active" id="section-overview">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="s-label">Total Produk</div>
+                <div class="s-val" id="stat-products">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="s-label">Total Pesanan</div>
+                <div class="s-val" id="stat-orders">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="s-label">Pesanan Baru</div>
+                <div class="s-val" id="stat-new">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="s-label">Pendapatan</div>
+                <div class="s-val" id="stat-income" style="font-size: 22px;">Rp 0</div>
+              </div>
+            </div>
+
+            <div class="section-card">
+              <div class="section-card-header">
+                <h3>Pesanan Terbaru</h3>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Pelanggan</th>
+                    <th>Meja</th>
+                    <th>Total</th>
+                    <th>Bayar</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-orders-table"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-products">
+            <div class="section-card">
+              <div class="section-card-header">
+                <h3>Kelola Produk/Menu</h3>
+                <button class="add-row-btn" onclick="openProductModal()">+ Tambah Menu</button>
+              </div>
+              <div class="card-body">
+                <div class="toolbar">
+                  <input class="search-input" id="product-search" placeholder="Cari produk..." oninput="renderAdminProducts()" />
+                  <select class="form-select" id="product-category-filter" onchange="renderAdminProducts()" style="max-width: 220px;">
+                    <option value="semua">Semua Kategori</option>
+                    <option value="panas">Kopi Panas</option>
+                    <option value="dingin">Kopi Dingin</option>
+                    <option value="signature">Signature</option>
+                    <option value="nonkopi">Non-Kopi</option>
+                  </select>
+                </div>
+                <div class="product-grid" id="admin-product-grid"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-orders">
+            <div class="section-card">
+              <div class="section-card-header">
+                <h3>Daftar Pesanan</h3>
+              </div>
+              <div class="card-body">
+                <div class="toolbar">
+                  <select class="form-select" id="order-status-filter" onchange="renderOrders()" style="max-width: 220px;">
+                    <option value="semua">Semua Status</option>
+                    <option value="baru">Baru</option>
+                    <option value="proses">Proses</option>
+                    <option value="diantar">Diantar</option>
+                    <option value="selesai">Selesai</option>
+                    <option value="batal">Batal</option>
+                  </select>
+                  <select class="form-select" id="payment-filter" onchange="renderOrders()" style="max-width: 220px;">
+                    <option value="semua">Semua Pembayaran</option>
+                    <option value="QR">QR</option>
+                    <option value="Cash">Cash</option>
+                  </select>
+                </div>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Pelanggan</th>
+                    <th>Meja</th>
+                    <th>Menu</th>
+                    <th>Total</th>
+                    <th>Bayar</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-baristas">
+            <div class="section-card">
+              <div class="section-card-header">
+                <h3>Akun Barista</h3>
+                <button class="add-row-btn" onclick="openBaristaModal()">+ Tambah Barista</button>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="baristas-table"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="dash-section" id="section-reports">
+            <div class="section-card">
+              <div class="section-card-header">
+                <h3>Laporan Bulanan</h3>
+                <button class="add-row-btn" onclick="exportMonthlyPDF()">Export PDF</button>
+              </div>
+              <div class="card-body" id="report-preview"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="product-modal">
+      <div class="modal-card">
+        <h2 id="product-modal-title">Tambah Produk</h2>
+        <div class="form-group">
+          <label class="form-label">Nama Produk</label>
+          <input class="form-input" id="p-name" placeholder="Contoh: Kopi Susu Aren" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Harga</label>
+            <input class="form-input" id="p-price" type="number" placeholder="15000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kategori</label>
+            <select class="form-select" id="p-category">
+              <option value="panas">Kopi Panas</option>
+              <option value="dingin">Kopi Dingin</option>
+              <option value="signature">Signature</option>
+              <option value="nonkopi">Non-Kopi</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deskripsi</label>
+          <textarea class="form-textarea" id="p-desc" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">URL Gambar</label>
+          <input class="form-input" id="p-image" placeholder="https://..." />
+          <small class="form-help">Bisa isi URL manual, atau upload file gambar di bawah ini.</small>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Upload Gambar Produk</label>
+          <input class="form-input" id="p-image-file" type="file" accept="image/*" />
+          <small class="form-help">Opsional. Kalau upload file, gambar masuk ke Firebase Storage dan URL otomatis disimpan.</small>
+          <div class="image-preview" id="p-image-preview"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Icon Produk</label>
+            <select class="form-select" id="p-icon">
+              <option value="☕">☕ Kopi panas</option>
+              <option value="🧊">🧊 Kopi dingin</option>
+              <option value="🥛">🥛 Latte / susu</option>
+              <option value="🍵">🍵 Matcha / teh</option>
+              <option value="🍫">🍫 Coklat</option>
+              <option value="🟢">🟢 Signature hijau</option>
+              <option value="🥤">🥤 Minuman cup</option>
+              <option value="🍹">🍹 Minuman segar</option>
+              <option value="🫖">🫖 Teh hangat</option>
+              <option value="🍪">🍪 Snack</option>
+              <option value="🍰">🍰 Cake</option>
+              <option value="🥐">🥐 Croissant</option>
+              <option value="🍞">🍞 Roti</option>
+              <option value="🍩">🍩 Donat</option>
+              <option value="⭐">⭐ Favorit</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Badge (opsional)</label>
+            <input class="form-input" id="p-badge" placeholder="Terlaris" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeProductModal()">Batal</button>
+          <button class="btn-save" onclick="saveProduct()">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="barista-modal">
+      <div class="modal-card">
+        <h2 id="barista-modal-title">Tambah Barista</h2>
+        <div class="form-group">
+          <label class="form-label">Nama</label>
+          <input class="form-input" id="b-name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input class="form-input" id="b-username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" id="b-password" type="password" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="b-status">
+            <option value="aktif">Aktif</option>
+            <option value="nonaktif">Nonaktif</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeBaristaModal()">Batal</button>
+          <button class="btn-save" onclick="saveBarista()">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/admin.js"></script>
+  </body>
+</html>

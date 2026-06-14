@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../logo.jpg" />
+    <title>Pesan - Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="../index.html">
+        <img src="../logo.jpg" alt="Logo Tuah Kopi" class="logo-img" />
+        <span class="logo-text">Tuah Kopi</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../index.html">Beranda</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link active" href="order.html">Pesan</a>
+        <a class="nav-link" href="tracking.html">Aktivitas</a>
+      </div>
+      <a class="nav-btn" href="menu.html">+ Tambah Menu</a>
+    </nav>
+
+    <header class="order-hero">
+      <h1>Form Pemesanan</h1>
+      <p>Isi data pelanggan, pilih metode pembayaran QR atau Cash, lalu kirim pesanan.</p>
+    </header>
+
+    <main class="order-layout">
+      <section>
+        <div class="form-card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <h3>👤 Data Pelanggan</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Nama Pelanggan</label>
+                <input class="form-input" id="customer-name" placeholder="Contoh: Akbar" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nomor Meja</label>
+                <input class="form-input" id="table-number" type="number" min="1" placeholder="Contoh: 5" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card" style="margin-bottom: 20px;">
+          <div class="card-header">
+            <h3>☕ Keranjang</h3>
+          </div>
+          <div class="card-body" id="cart-list"></div>
+        </div>
+
+        <div class="form-card">
+          <div class="card-header">
+            <h3>💳 Metode Pembayaran</h3>
+          </div>
+          <div class="card-body">
+            <div class="payment-options">
+              <div class="payment-card active" id="pay-qr" onclick="setPaymentMethod('QR')">
+                <h3>QR</h3>
+                <p style="color: var(--muted); font-size: 13px;">Bayar via QRIS</p>
+              </div>
+              <div class="payment-card" id="pay-cash" onclick="setPaymentMethod('Cash')">
+                <h3>Cash</h3>
+                <p style="color: var(--muted); font-size: 13px;">Bayar tunai ke kasir</p>
+              </div>
+            </div>
+            <div id="qr-box" class="qr-payment-box">
+              <div class="qr-payment-header">
+                <img src="../logo.jpg" alt="Logo Tuah Kopi" class="qr-logo" />
+                <div>
+                  <strong>QRIS Tuah Kopi</strong>
+                  <p>Scan QR untuk melakukan pembayaran.</p>
+                </div>
+              </div>
+              <img src="../assets/img/qris-tuah-kopi.png" alt="QRIS Tuah Kopi" class="qr-image" />
+              <small>Pastikan nominal pembayaran sesuai total pesanan.</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="summary-card" style="position: sticky; top: 80px;">
+        <div class="card-header">
+          <h3>🧾 Ringkasan</h3>
+        </div>
+        <div class="card-body">
+          <div id="summary-lines"></div>
+          <div class="summary-line total">
+            <span>Total</span>
+            <span id="summary-total">Rp 0</span>
+          </div>
+          <button class="submit-btn" onclick="submitOrder()">Kirim Pesanan</button>
+        </div>
+      </aside>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/order.js"></script>
+  </body>
+</html>

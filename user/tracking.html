@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../logo.jpg" />
+    <title>Aktivitas Pesanan - Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="../index.html">
+        <img src="../logo.jpg" alt="Logo Tuah Kopi" class="logo-img" />
+        <span class="logo-text">Tuah Kopi</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="../index.html">Beranda</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link" href="order.html">Pesan</a>
+        <a class="nav-link active" href="tracking.html">Aktivitas</a>
+      </div>
+      <a class="nav-btn" href="order.html">🛒 Pesan (<span id="cart-count">0</span>)</a>
+    </nav>
+
+    <header class="order-hero">
+      <h1>Aktivitas Pesanan</h1>
+      <p>Lihat status minuman kamu secara realtime: diterima, diproses, diantar, sampai selesai.</p>
+    </header>
+
+    <main class="tracking-layout">
+      <section class="form-card">
+        <div class="card-header">
+          <h3>🔎 Lacak Pesanan</h3>
+        </div>
+        <div class="card-body">
+          <div class="tracking-search">
+            <input
+              class="form-input"
+              id="tracking-code"
+              placeholder="Masukkan kode pesanan, contoh: TK-178085752704"
+            />
+            <button class="submit-btn" style="margin-top:0;" onclick="trackOrderFromInput()">Lihat Aktivitas</button>
+          </div>
+          <small class="form-help">
+            Kode pesanan muncul setelah kamu mengirim pesanan. Status berubah otomatis saat barista/admin memperbarui pesanan.
+          </small>
+        </div>
+      </section>
+
+      <section id="tracking-result"></section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/tracking.js"></script>
+  </body>
+</html>
