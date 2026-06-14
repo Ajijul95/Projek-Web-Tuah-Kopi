@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="logo.jpg" />
+    <title>Tuah Kopi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <img src="logo.jpg" alt="Logo Tuah Kopi" class="logo-img" />
+        <span class="logo-text">Tuah Kopi</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link active" href="index.html">Beranda</a>
+        <a class="nav-link" href="user/menu.html">Menu</a>
+        <a class="nav-link" href="user/order.html">Pesan</a>
+        <a class="nav-link" href="user/tracking.html">Aktivitas</a>
+      </div>
+      <a class="nav-btn" href="login.html">Masuk Staff</a>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-eyebrow">☕ Kedai Kopi Lokal</div>
+          <h1>Rasa <em>Autentik</em> di Setiap Tegukan</h1>
+          <p>
+            Tuah Kopi hadir dengan cita rasa kopi pilihan dari biji terbaik
+            Nusantara. Pesan langsung dari meja kamu dengan pilihan pembayaran
+            QR atau Cash.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="user/menu.html">Lihat Menu</a>
+            <a class="btn-secondary" href="user/order.html">Pesan Sekarang</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="promo-bar">
+        <p>
+          🎉 Promo Spesial: <strong>Diskon 15%</strong> untuk pembelian 2
+          minuman atau lebih
+        </p>
+        <span class="promo-tag">HARI INI SAJA</span>
+      </div>
+
+      <section class="section">
+        <div class="section-label">Menu Unggulan</div>
+        <h2 class="section-title">Minuman Favorit Pelanggan</h2>
+        <p class="section-sub">
+          Data menu di bawah ini diambil langsung dari Firebase collection
+          <strong>products</strong>.
+        </p>
+        <div class="menu-grid" id="home-menu-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <strong>☕ Tuah Kopi</strong> · Kedai kopi lokal dengan sistem pemesanan
+        Firebase.
+      </p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        updateCartCount();
+        const products = await getProductsFromFirebase();
+        renderProductCards(products.slice(0, 3), "home-menu-grid");
+      });
+    </script>
+  </body>
+</html>
